@@ -1,0 +1,37 @@
+<template>
+
+  <div id="mainPageHeader">
+    <div id="headerBarLeft">Header Left Side</div>
+    <div id="headerBarRight" if.bind="isAuthenticated">
+      <p>
+        Logged in as: <span>${loginName}</span>&nbsp;&nbsp;
+        <button class="btn btn-primary" click.delegate="handleLogoutClick()">Logout</button>
+      </p>
+    </div>
+  </div>
+
+  <div id="mainPageNavigation" class="${!showMenu ? 'hidden' : ''}">
+    <div class="navBarInner">
+      <div repeat.for="row of router.navigation | authFilter: isAuthenticated" class="navItem ${row.isActive ? 'active' : ''}">
+        <a href.bind="row.href">${row.title}</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="mainPageBody">
+
+    <div id="pageSidebar" class="${!showSidebar ? 'hidden' : ''}">
+      Side Bar
+    </div>
+
+    <div id="pageContainer">
+      <router-view></router-view>
+    </div>
+
+  </div>
+
+  <div id="mainPageFooter">
+    Page footer and copy right
+  </div>
+
+</template>
